@@ -1,0 +1,53 @@
+@import '../../../public/scss/mixins';
+.hero {
+  background: #F9F3EC;
+  
+  .swiper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+.hero__inner {
+  @include flex-center;
+  gap: 80px;
+}
+
+.hero__image img {
+  width: 100%;
+  object-fit: cover;
+  max-width: 500px;
+}
+
+.hero__label {
+  color: #DEAD6F;
+  font-size: 18px;
+  letter-spacing: 10%;
+}
+
+.hero__title {
+  font-size: 74px;
+  margin: 20px 0 30px;
+  
+  span {
+    color: #DEAD6F;
+  }
+}
+
+.hero__btn {
+  @include button;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: none;
+    border: 1px solid #41403E;
+  opacity: 0.3;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #41403E;
+}

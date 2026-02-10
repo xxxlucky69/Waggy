@@ -1,0 +1,19 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin button {
+  background: none;
+  color: #41403E;
+  border: 1px solid #41403E;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    background: #DEAD6F;
+  }
+}

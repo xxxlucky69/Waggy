@@ -1,0 +1,60 @@
+@import '../../../public/scss/mixins';
+
+.navigation {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  margin: 0 auto;
+  gap: 30px;
+  
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      color: #DEAD6F;
+    }
+  }
+}
+
+.nav-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  
+  img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}
+
+.nav-cart {
+  position: relative;
+  
+  span {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #DEAD6F;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    @include flex-center;
+  }
+}

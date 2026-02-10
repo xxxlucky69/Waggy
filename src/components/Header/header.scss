@@ -1,0 +1,58 @@
+.header {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    &__search {
+        min-width: 470px;
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .search-icon {
+                position: absolute;
+                right: 15px;
+                color: #666;
+            }
+
+            .search-input {
+                width: 100%;
+                padding: 16px 12px 16px 25px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 15px;
+                 font-family: "Chilanka", cursive;
+            }
+        }
+
+    }
+
+    &__contacts {
+        display: flex;
+        gap: 50px;
+        flex-shrink: 0;
+        
+        .contact-item {
+            text-align: right;
+
+            .contact-label {
+                color: #666;
+            }
+
+            a {
+                color: #333;
+    text-decoration: none;
+            }
+        }
+
+        
+    }
+}

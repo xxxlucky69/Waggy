@@ -1,0 +1,9 @@
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.gallery__grid img {
+  border-radius: 10px;
+}
