@@ -1,0 +1,138 @@
+@import './../../styles/mixins.scss';
+
+/* HEADER НА ВСЮ ШИРИНУ */
+
+.favourites__header {
+  width: 100%;
+  background: #F7EEE4;
+  padding: 30px 0;
+}
+
+.favourites__header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favourites__title {
+  font-size: 42px; /* увеличили */
+  color: #41403E;
+}
+
+/* BUTTON */
+
+.remove-btn {
+  padding: 20px 50px;
+  border: 1px solid #41403E;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  color: #41403E;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    background: #DEAD6F;
+  }
+}
+
+/* GRID КАК В PRODUCTS */
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* ПЕРЕИСПОЛЬЗУЕМ СТИЛИ КАРТОЧЕК */
+
+.product-card {
+  overflow: hidden;
+}
+
+.product__image {
+  height: 260px;
+  background: #EEEBE5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+.product__info {
+  padding: 20px 0;
+  text-align: left;
+}
+
+.product__name {
+  font-size: 18px;
+}
+
+.product__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product__price {
+  color: #DEAD6F;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* КНОПКИ ТЕ ЖЕ */
+
+.product__actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* адаптив если надо */
+
+@media (max-width: 992px) {
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+.product-card {
+  position: relative;
+}
+
+/* кнопка удаления из избранного */
+.fav-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  z-index: 2;
+
+  svg {
+    font-size: 18px;
+    color: #DEAD6F; // жёлтое сердце
+    transition: 0.2s;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}

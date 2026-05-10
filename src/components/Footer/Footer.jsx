@@ -1,16 +1,13 @@
-import './Footer.scss';
+import React from 'react'
+import './footer.scss'
 
-const Footer = () => {
+function Footer() {
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer__content">
-          <p>©2026 Waggy. All rights reserved.</p>
-          <p>Городецкая 451</p>
-        </div>
-      </div>
-    </footer>
-  );
-};
+    <p className="footer__copy">©2026 Waggy. All rights reserved.</p>
+    <p className="footer__author">Городецкая 451</p>
+  </footer>
+  )
+}
 
 export default Footer;

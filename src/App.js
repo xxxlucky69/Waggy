@@ -1,48 +1,39 @@
-import { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, BrowserRouter} from 'react-router-dom'
-import Header from './components/Header/Header'
-import Navbar from './components/Navbar/Navbar'
-import Slider from './components/Slider/Slider'
-import Products from './components/Products/Products'
-import Form from './components/Form/Form'
-import Gallery from './components/Gallery/Gallery'
-import Footer from './components/Footer/Footer'
+// src/App.js
+import './App.css';
+import './style.scss'
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import { useState } from 'react';
+import useLocalStorage from './hooks/useLocalStorage'
+import HomePage from './pages/HomePage/HomePage';
+import NotFound from './pages/NotFound/NotFound';
+import Cart from './pages/Cart/Cart';
+import Favourites from './pages/Favourites/Favourites';
+import EmptyUser from './components/EmptyUser/EmptyUser';
+import { SearchProvider } from './context/SearchContext';
+import CookieConsent from './components/CookieConsent/CookieConsent'; // Добавьте импорт
 
-export default function App() {
-  const [cartCount, setCartCount] = useState(() => {
-    const saved = localStorage.getItem('cartCount');
-    return saved ? parseInt(saved) : 0;
-  });
-  const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem('cartCount', cartCount.toString());
-  }, [cartCount]);
-
-  const addToCart = () => {
-    setCartCount(prev => prev + 1);
-  }
-
-  return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<div>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-      <Navbar cartCount={cartCount}/>
-      <Slider/>
-      <Products addToCart={addToCart} searchQuery={searchQuery}/>
-      <Form/>
-      <Gallery/>
-      <Footer/>
-    </div>}/>
-
-    <Route path='/cart' element={<div>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-      <Navbar cartCount={cartCount}/>
-      <Footer/>
-    </div>}/>
-    </Routes>
+function App() {
+    const [cart, setCart] = useLocalStorage('cart', []);
+    const [favourites, setFavourites] = useLocalStorage('favourites', []);
     
-    </BrowserRouter>
-  );
+    return (
+        <SearchProvider>
+            <div className="App">
+                <Header cart={cart}/>
+                <Routes>
+                    <Route index element={<HomePage cart={cart} setCart={setCart} favourites={favourites} setFavourites={setFavourites}/>} />
+                    <Route path="/cart" element={<Cart cart={cart} setCart={setCart} favourites={favourites} setFavourites={setFavourites}/>} />
+                    <Route path="/favourites" element={<Favourites cart={cart} setCart={setCart} favourites={favourites} setFavourites={setFavourites}/>} />
+                    <Route path="/account" element={<EmptyUser />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer/>
+                <CookieConsent /> 
+            </div>
+        </SearchProvider>
+    );
 }
+
+export default App;

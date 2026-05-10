@@ -1,168 +1,123 @@
-import { useState } from 'react';
-import './products.scss';
+import React, { useState } from "react";
+import "./products.scss";
+import { MdOutlineStar } from "react-icons/md";
+import products from "../../assets/data";
+import BtnAddToCart from "../BtnAddToCart/BtnAddToCart";
+import AddToFav from "../AddToFav/AddToFav";
+import { useSearch } from "../../context/SearchContext";
+import { NavLink } from "react-router-dom";
 
-const Products = ({ addToCart, searchQuery }) => {
-  const [filter, setFilter] = useState('ALL');
-  
-  const products = [
-    {
-      id: 1,
-      img: '/img/product1.png',
-      title: 'Dry food',
-      rating: '4.0',
-      price: '$18.00',
-      category: 'dog',
-    },
-    {
-      id: 2,
-      img: '/img/product2.png',
-      title: 'Canned dog food',
-      rating: '4.0',
-      price: '$8.00',
-      category: 'dog',
-    },
-    {
-      id: 3,
-      img: '/img/product3.png',
-      title: 'Treats for cats',
-      rating: '5.0',
-      price: '$5.00',
-      category: 'cat',
-    },
-    {
-      id: 4,
-      img: '/img/product4.png',
-      title: 'Pate for dogs',
-      rating: '5.0',
-      price: '$7.00',
-      category: 'dog',
-    },
-    {
-      id: 5,
-      img: '/img/product5.png',
-      title: 'Dry cat food',
-      rating: '3.0',
-      price: '$10.00',
-      category: 'cat',
-    },
-    {
-      id: 6,
-      img: '/img/product6.png',
-      title: 'Food for parrots',
-      rating: '5.0',
-      price: '$12.00',
-      category: 'bird',
-    },
-    {
-      id: 7,
-      img: '/img/product7.png',
-      title: 'Canned dog food',
-      rating: '4.5',
-      price: '$15.00',
-      category: 'dog',
-    },
-    {
-      id: 8,
-      img: '/img/product8.png',
-      title: 'Сandy for cats',
-      rating: '5.0',
-      price: '$3.00',
-      category: 'cat',
-    },
-  ];
-  
+function Products({
+  cart,
+  setCart,
+  favourites,
+  setFavourites,
+  searchQuery: propSearchQuery,
+}) {
+  const [filter, setFilter] = useState("ALL");
+  const { clearSearch, searchQuery: contextSearchQuery } = useSearch();
 
-  const filteredProducts = products.filter(product => {
-    const matchText = product.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    
-    const matchCategory = filter === 'ALL' || 
+  const searchTerm = propSearchQuery || contextSearchQuery || "";
+
+  const filtered = products.filter((product) => {
+    const matchCategory =
+      filter === "ALL" ||
       product.category.toLowerCase() === filter.toLowerCase();
-    
-    return matchText && matchCategory;
+
+    const matchSearch =
+      searchTerm === "" ||
+      product.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchCategory && matchSearch;
   });
 
   return (
     <section className="products">
       <div className="container">
+
+        {/* HEADER */}
         <div className="products__header">
-          <div className='products__controls'>
+          <div className="products__controls">
             <h2 className="products__title">Products</h2>
+
             <div className="filters">
-              <a 
-                className={filter === 'ALL' ? 'active' : ''} 
-                onClick={() => setFilter('ALL')}
-                style={{ cursor: 'pointer' }}
-              >
-                ALL
-              </a>
-              <a 
-                className={filter === 'cat' ? 'active' : ''} 
-                onClick={() => setFilter('cat')}
-                style={{ cursor: 'pointer' }}
-              >
-                CAT
-              </a>
-              <a 
-                className={filter === 'dog' ? 'active' : ''} 
-                onClick={() => setFilter('dog')}
-                style={{ cursor: 'pointer' }}
-              >
-                DOG
-              </a>
-              <a 
-                className={filter === 'bird' ? 'active' : ''} 
-                onClick={() => setFilter('bird')}
-                style={{ cursor: 'pointer' }}
-              >
-                BIRD
-              </a>
+              {["ALL", "cat", "dog", "bird"].map((cat) => (
+                <span
+                  key={cat}
+                  className={filter === cat ? "active" : ""}
+                  onClick={() => setFilter(cat)}
+                >
+                  {cat.toUpperCase()}
+                </span>
+              ))}
             </div>
           </div>
-          
-          <div className="products__controls">
+
+          <NavLink to="/shop">
             <button className="shop-btn">SHOP ALL →</button>
-          </div>
+          </NavLink>
         </div>
-        
+
+        {/* SEARCH */}
+        {searchTerm && (
+          <div className="search-active">
+            <span>
+              Search results for: "<strong>{searchTerm}</strong>"
+            </span>
+            <button onClick={clearSearch}>✕</button>
+          </div>
+        )}
+
+        {/* GRID */}
         <div className="products__grid">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map(product => (
-              <div key={product.id} className="product-card">
+          {filtered.length === 0 ? (
+            <div className="no-results">No products found</div>
+          ) : (
+            filtered.map((product) => (
+              <div className="product-card" key={product.id}>
+                
                 <div className="product__image">
                   <img src={product.img} alt={product.title} />
                 </div>
+
                 <div className="product__info">
                   <h3 className="product__name">{product.title}</h3>
+
                   <div className="product__rating">
-                    <img src='/img/star.svg' alt="rating star"/>
-                    <span className="rating-value">{product.rating}</span>
+                    <MdOutlineStar color="#DEAD6F" />
+                    <span>{product.rating}</span>
                   </div>
-                  <div className="product__price">{product.price}</div>
+
+                  <div className="product__price">
+                    ${product.price}
+                  </div>
+
                   <div className="product__actions">
-                    <button 
-                      className="add-to-cart" 
-                      onClick={addToCart}
-                    >
-                      ADD TO CART
-                    </button>
-                    <button className="favorite-btn">
-                      <img src='/img/heart.svg' alt="favorite"/>
-                    </button>
-                  </div>
+  <div className="add-to-cart">
+    <BtnAddToCart
+      product={product}
+      cart={cart}
+      setCart={setCart}
+    />
+  </div>
+
+  <div className="favorite-btn">
+    <AddToFav
+      product={product}
+      favourites={favourites}
+      setFavourites={setFavourites}
+    />
+  </div>
+</div>
                 </div>
+
               </div>
             ))
-          ) : (
-            <div className="no-results">
-              Товары не найдены
-            </div>
           )}
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default Products;

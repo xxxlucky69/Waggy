@@ -1,25 +1,23 @@
-import './Gallery.scss';
+import React from 'react'
+import './gallery.scss'
+import images from './../../assets/dataGallery'
+//import G1 from './../../assets/img/gallery1.jpg'
 
-const Gallery = () => {
-  const galleryImages = [
-    "/img/gallery1.jpg",
-    "/img/gallery2.png",
-    "/img/gallery3.png",
-    "/img/gallery4.jpg",
-    "/img/gallery5.jpg",
-    "/img/gallery6.png"
-  ];
+function Gallery() {
   return (
-    <section className="gallery">
-      <div className="container">
-        <div className="gallery__grid">
-          {galleryImages.map((src, index)=> (
-            <img key={index} src={src} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+     <section className="gallery">
+       <div className="gallery__grid">
+        {
+            images.map((img, index)=>{
+                return (
+                    <img key={index} src={img}></img>
+                )
+            })
+        }
+    
+       </div>
+     </section>
+  )
+}
 
-export default Gallery;
+export default Gallery

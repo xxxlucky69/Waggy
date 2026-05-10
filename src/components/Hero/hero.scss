@@ -1,0 +1,71 @@
+@import './../../styles/mixins.scss';
+
+.hero {
+  background: #F9F3EC;
+
+  .swiper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+}
+
+.hero__inner {
+  @include flex(center, center, nowrap);
+  gap: 80px;
+}
+
+.hero__image img {
+  width: 100%;
+  max-width: 500px;
+  object-fit: cover;
+}
+
+.hero__label {
+  color: #DEAD6F;
+  font-size: 18px;
+  letter-spacing: 10%;
+}
+
+.hero__title {
+  font-size: 74px;
+  margin: 20px 0 30px;
+
+  span {
+    color: #DEAD6F;
+  }
+}
+
+.hero__content {
+  text-align: left;
+  max-width: 600px;
+}
+
+.hero__btn {
+  padding: 20px 50px;
+  border: 1px solid #41403E;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  color: #41403E;
+  cursor: pointer;
+
+  &:hover {
+    background: #DEAD6F;
+  }
+}
+
+.hero {
+  .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: none;
+    border: 1px solid #41403E;
+  opacity: 0.3;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #41403E;
+}
+}

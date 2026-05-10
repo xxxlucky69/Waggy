@@ -1,0 +1,297 @@
+@import './../../styles/mixins.scss';
+
+/* =========================
+   BASE CONTROL SIZE
+========================= */
+$control-size: 44px;
+
+/* =========================
+   HEADER
+========================= */
+
+.cart__header {
+  width: 100%;
+  background: #F7EEE4;
+  padding: 30px 0;
+}
+
+.cart__header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__title {
+  font-size: 42px;
+  color: #41403E;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.cart__actions {
+  display: flex;
+  gap: 15px;
+
+  button {
+    padding: 20px 50px;
+    border: 1px solid #41403E;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #41403E;
+    cursor: pointer;
+
+    &:hover {
+      background: #DEAD6F;
+
+    }
+  }
+}
+
+/* =========================
+   GRID (PRODUCTS)
+========================= */
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.product-card {
+  position: relative;
+}
+
+.cart-check {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  accent-color: #DEAD6F;
+  z-index: 2;
+}
+
+/* IMAGE */
+
+.product__image {
+  height: 260px;
+  background: #EEEBE5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+/* INFO */
+
+.product__info {
+  padding: 20px 0;
+  text-align: left;
+}
+
+.product__name {
+  font-size: 18px;
+}
+
+.product__rating {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.product__price {
+  color: #DEAD6F;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* =========================
+   ACTIONS (CART + FAVORITE)
+========================= */
+
+.product__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =========================
+   CART COUNT (+ / - / number)
+========================= */
+
+.cart-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-count button {
+  width: $control-size;
+  height: $control-size;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-count .increase {
+  background: #DEAD6F;
+  color: #fff;
+}
+
+.cart-count .decrease {
+  background: rgba(228, 228, 228, 0.867);
+  color: #41403E;
+}
+
+.cart-count h1 {
+  width: $control-size;
+  height: $control-size;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  border: 1px solid #b6b5b4;
+  border-radius: 6px;
+  background: #fff;
+  color: #41403E;
+}
+
+/* =========================
+   FAVORITE BUTTON
+========================= */
+.cart-like-btn {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+  border: 1px solid #b6b5b4;
+  background: transparent;
+}
+
+.cart-like-btn svg {
+  font-size: 18px;
+  color: #41403E;
+}
+
+.cart-like-btn:hover {
+  background: #DEAD6F; 
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+.cart__total {
+  background: #F7EEE4;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.cart__total-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__total-price {
+  font-size: 28px;
+
+
+}
+
+.cart__pay-btn {
+  padding: 20px 50px;
+  border: 1px solid #41403E;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 18px;
+  color: #41403E;
+  text-decoration: none;
+
+  &:hover {
+    background: #DEAD6F;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ACTIONS */
+
+.product__actions1 {
+  display: flex;
+  gap: 10px;
+}
+
+
+.product__actions1 button {
+  flex: 1;
+  background: none;
+
+  padding: 15px;
+  cursor: pointer;
+
+
+}
+
+
+.product__actions1 {
+  display: flex;
+  gap: 10px;
+}
+
+
+.cart__total-price {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 28px;
+}
+
+.total-label {
+  color: #41403E; /* серый */
+  font-weight: 400;
+}
+
+.total-sum {
+  color: #DEAD6F; /* жёлтый */
+  font-weight: 700;
+}
